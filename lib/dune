@@ -1,0 +1,3 @@
+(library
+ (name sc_set)
+ (modules sc_set))
