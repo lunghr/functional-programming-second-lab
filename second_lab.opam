@@ -11,9 +11,9 @@ doc: "https://url/to/documentation"
 bug-reports: "https://github.com/username/reponame/issues"
 depends: [
   "ocaml"
+  "ounit2" {with-test & >= "2.2.7"}
   "dune" {>= "3.16"}
   "odoc" {with-doc}
-  "ounit2" {with-test}
 ]
 build: [
   ["dune" "subst"] {dev}
