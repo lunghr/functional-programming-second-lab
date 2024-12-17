@@ -100,14 +100,84 @@ let test_fold_left _ =
     let concat = fold_right (fun x acc -> acc ^ x) "" string_set in
     assert_equal "dcbae" concat
 
+let test_merge _ =
+    let set1 = create len in
+    let set1 = add set1 1 in
+    let set1 = add set1 2 in
+    let set1 = add set1 3 in
+    let set1 = add set1 4 in
+    let set1 = add set1 5 in
+    let set2 = create len in
+    let set2 = add set2 6 in
+    let set2 = add set2 7 in
+    let set2 = add set2 8 in
+    let set2 = add set2 9 in
+    let set2 = add set2 10 in
+    let set = merge set1 set2 in
+    Printf.printf "%s\n" (string_of_hashSet set);
+    assert_equal true (setHas set 1);
+    assert_equal true (setHas set 2);
+    assert_equal true (setHas set 3);
+    assert_equal true (setHas set 4);
+    assert_equal true (setHas set 5);
+    assert_equal true (setHas set 6);
+    assert_equal true (setHas set 7);
+    assert_equal true (setHas set 8);
+    assert_equal true (setHas set 9);
+    assert_equal true (setHas set 10)
 
+let test_compare _ =
+    let set1 = create len in
+    let set1 = add set1 1 in
+    let set1 = add set1 2 in
+    let set1 = add set1 3 in
+    let set1 = add set1 4 in
+    let set1 = add set1 5 in
+    let set2 = create len in
+    let set2 = add set2 6 in
+    let set2 = add set2 7 in
+    let set2 = add set2 8 in
+    let set2 = add set2 9 in
+    let set2 = add set2 10 in
+    assert_equal false (compare_sets set1 set2);
+    assert_equal true (compare_sets set1 set)
+
+let test_associative _ =
+    let set1 = create 10 in
+    let set1 = add set1 "a" in
+    let set1 = add set1 "b" in  (* Переприсваиваем результат *)
+    let set2 = create 10 in
+    let set2 = add set2 "c" in
+    let set2 = add set2 "d" in
+    let set3 = create 10 in
+    let set3 = add set3 "e" in
+    let test_assoc = merge (merge set1 set2) set3 = merge set1 (merge set2 set3) in
+    assert_equal true test_assoc
+
+let test_commutative _ =
+    let set1 = create 10 in
+    let set1 = add set1 "a" in
+    let set1 = add set1 "b" in  (* Переприсваиваем результат *)
+    let set2 = create 10 in
+    let set2 = add set2 "c" in
+    let set2 = add set2 "d" in
+    let test_comm = merge set1 set2 = merge set2 set1 in
+    assert_equal true test_comm
+
+
+
+    (* Тест на идемпотентность *)
 let suite = "test_second_lab" >::: [
     "test_add" >:: test_add;
     "test_remove" >:: test_remove;
     "test_filter" >:: test_filter;
     "test_map" >:: test_map;
     "test_fold_left" >:: test_fold_left;
-    "test_fold_right" >:: test_fold_right
+    "test_fold_right" >:: test_fold_right;
+    "test_merge" >:: test_merge;
+    "test_compare" >:: test_compare;
+    "test_associative" >:: test_associative;
+    "test_commutative" >:: test_commutative
 ]
 
 let () =
