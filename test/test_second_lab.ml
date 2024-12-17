@@ -107,7 +107,6 @@ let test_merge _ =
   let set2 = add set2 9 in
   let set2 = add set2 10 in
   let set = merge set1 set2 in
-  Printf.printf "%s\n" (string_of_hashSet set);
   assert_equal true (setHas set 1);
   assert_equal true (setHas set 2);
   assert_equal true (setHas set 3);
@@ -159,6 +158,16 @@ let test_commutative _ =
   let test_comm = merge set1 set2 = merge set2 set1 in
   assert_equal true test_comm
 
+let test_neutral_element _ =
+  let set1 = create 10 in
+  let set1 = add set1 "a" in
+  let set1 = add set1 "b" in
+  let emptySet = create 10 in
+  let test_left_neutral = merge set1 emptySet = set1 in
+  let test_right_neutral = merge emptySet set1 = set1 in
+  assert_equal true test_left_neutral;
+  assert_equal true test_right_neutral
+
 let suite =
   "test_second_lab"
   >::: [
@@ -172,6 +181,7 @@ let suite =
          "test_compare" >:: test_compare;
          "test_associative" >:: test_associative;
          "test_commutative" >:: test_commutative;
+         "test_neutral_element" >:: test_neutral_element;
        ]
 
 let () = run_test_tt_main suite

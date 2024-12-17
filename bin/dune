@@ -1,4 +1,3 @@
 (executable
  (public_name second_lab)
- (name main)
- (libraries sc_set ounit2))
+ (name main))
