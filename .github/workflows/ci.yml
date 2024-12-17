@@ -42,12 +42,6 @@ jobs:
         with:
           ocaml-compiler: 5
 
-      - name: Install dependencies
-        run: |
-          opam install . --deps-only --with-test
-          opam install ounit2
-          opam exec -- dune build
-
       - name: Lint documentation
         uses: ocaml/setup-ocaml/lint-doc@v3
 
