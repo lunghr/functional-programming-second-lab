@@ -1,3 +1,9 @@
 (test
  (name test_second_lab)
- (libraries ounit2 sc_set))
+ (modules test_second_lab)
+ (libraries ounit2 qcheck sc_set))
+
+(test
+ (name prop_test_second_lab)
+ (modules prop_test_second_lab)
+ (libraries ounit2 qcheck sc_set))

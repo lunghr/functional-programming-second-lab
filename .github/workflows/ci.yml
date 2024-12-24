@@ -24,6 +24,7 @@ jobs:
         run: |
           opam install . --deps-only --with-test
           opam install ounit2
+          opam install QCheck
           opam exec -- dune build
 
       - name: Run tests

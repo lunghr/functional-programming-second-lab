@@ -17,7 +17,7 @@ let string_of_hashSet hashSet =
     (fun acc chain -> acc ^ string_of_chain chain ^ "\n")
     "" hashSet.chains
 
-let create size = { size; chains = Array.make size Empty }
+let create size = { size = max size 1; chains = Array.make (max size 1) Empty }
 let hash value = Hashtbl.hash value
 
 let add hashSet value =
