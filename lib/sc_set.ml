@@ -202,6 +202,7 @@ let rec mergeChains (chain1 : 'a chain) (chain2 : 'a chain) : 'a chain =
           entry = entry1;
           next = mergeChains next1 (Node { entry = entry2; next = next2 });
         }
+
 let isEmpty hashSet = countSetLength hashSet = 0
 
 let merge (set1 : 'a hashSet) (set2 : 'a hashSet) : 'a hashSet =
@@ -236,4 +237,3 @@ let compare_sets (set1 : 'a hashSet) (set2 : 'a hashSet) : bool =
     false
   else
     Array.for_all2 compare_chains set1.chains set2.chains
-

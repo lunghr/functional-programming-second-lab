@@ -3,8 +3,8 @@ open Sc_set
 
 let from_list lst = List.fold_left add (create ()) lst
 
- (* Test: Associativity *)
- let test_associativity =
+(* Test: Associativity *)
+let test_associativity =
   Test.make ~name:"Associativity of merging two sets"
     (triple (list int) (list int) (list int))
     (fun (lst1, lst2, lst3) ->
@@ -46,7 +46,7 @@ let test_merge =
       let set1 = from_list lst1 in
       let set2 = from_list lst2 in
       let merged = merge set1 set2 in
-      (List.for_all (setHas merged) lst1) || (List.for_all (setHas merged) lst2))
+      List.for_all (setHas merged) lst1 || List.for_all (setHas merged) lst2)
 
 (* Test: Filter *)
 let test_filter =
