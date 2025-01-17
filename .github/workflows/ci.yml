@@ -18,7 +18,7 @@ jobs:
       - name: Set up OCaml
         uses: ocaml/setup-ocaml@v3
         with:
-          ocaml-compiler: 5
+          ocaml-compiler: 5.0.0
 
       - name: Install dependencies
         run: |
@@ -41,7 +41,7 @@ jobs:
       - name: Set up OCaml
         uses: ocaml/setup-ocaml@v3
         with:
-          ocaml-compiler: 5
+          ocaml-compiler: 5.0.0
 
       - name: Lint documentation
         uses: ocaml/setup-ocaml/lint-doc@v3
