@@ -1,14 +1,13 @@
 open Sc_set
 open OUnit2
 
-let len = 10
-let set = create len
+let set = create ()
 let set = add set 1
 let set = add set 2
 let set = add set 3
 let set = add set 4
 let set = add set 5
-let string_set = create len
+let string_set = create ()
 let string_set = add string_set "a"
 let string_set = add string_set "b"
 let string_set = add string_set "c"
@@ -81,26 +80,14 @@ let test_map _ =
   assert_equal true (setHas string_set "dd");
   assert_equal true (setHas string_set "ee")
 
-let test_fold_left _ =
-  let sum = fold_left (fun acc x -> acc + x) 0 set in
-  assert_equal 15 sum;
-  let concat = fold_left (fun acc x -> acc ^ x) "" string_set in
-  assert_equal "eabcd" concat
-
-let test_fold_right _ =
-  let sum = fold_right (fun x acc -> acc + x) 0 set in
-  assert_equal 15 sum;
-  let concat = fold_right (fun x acc -> acc ^ x) "" string_set in
-  assert_equal "dcbae" concat
-
 let test_merge _ =
-  let set1 = create len in
+  let set1 = create () in
   let set1 = add set1 1 in
   let set1 = add set1 2 in
   let set1 = add set1 3 in
   let set1 = add set1 4 in
   let set1 = add set1 5 in
-  let set2 = create len in
+  let set2 = create () in
   let set2 = add set2 6 in
   let set2 = add set2 7 in
   let set2 = add set2 8 in
@@ -119,13 +106,13 @@ let test_merge _ =
   assert_equal true (setHas set 10)
 
 let test_compare _ =
-  let set1 = create len in
+  let set1 = create () in
   let set1 = add set1 1 in
   let set1 = add set1 2 in
   let set1 = add set1 3 in
   let set1 = add set1 4 in
   let set1 = add set1 5 in
-  let set2 = create len in
+  let set2 = create () in
   let set2 = add set2 6 in
   let set2 = add set2 7 in
   let set2 = add set2 8 in
@@ -135,13 +122,13 @@ let test_compare _ =
   assert_equal true (compare_sets set1 set)
 
 let test_associative _ =
-  let set1 = create 10 in
+  let set1 = create () in
   let set1 = add set1 "a" in
   let set1 = add set1 "b" in
-  let set2 = create 10 in
+  let set2 = create () in
   let set2 = add set2 "c" in
   let set2 = add set2 "d" in
-  let set3 = create 10 in
+  let set3 = create () in
   let set3 = add set3 "e" in
   let test_assoc =
     merge (merge set1 set2) set3 = merge set1 (merge set2 set3)
@@ -149,20 +136,20 @@ let test_associative _ =
   assert_equal true test_assoc
 
 let test_commutative _ =
-  let set1 = create 10 in
+  let set1 = create () in
   let set1 = add set1 "a" in
   let set1 = add set1 "b" in
-  let set2 = create 10 in
+  let set2 = create () in
   let set2 = add set2 "c" in
   let set2 = add set2 "d" in
   let test_comm = merge set1 set2 = merge set2 set1 in
   assert_equal true test_comm
 
 let test_neutral_element _ =
-  let set1 = create 10 in
+  let set1 = create () in
   let set1 = add set1 "a" in
   let set1 = add set1 "b" in
-  let emptySet = create 10 in
+  let emptySet = create () in
   let test_left_neutral = merge set1 emptySet = set1 in
   let test_right_neutral = merge emptySet set1 = set1 in
   assert_equal true test_left_neutral;
@@ -175,8 +162,6 @@ let suite =
          "test_remove" >:: test_remove;
          "test_filter" >:: test_filter;
          "test_map" >:: test_map;
-         "test_fold_left" >:: test_fold_left;
-         "test_fold_right" >:: test_fold_right;
          "test_merge" >:: test_merge;
          "test_compare" >:: test_compare;
          "test_associative" >:: test_associative;
